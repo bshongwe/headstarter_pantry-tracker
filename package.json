@@ -3,15 +3,15 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint",
-    "export": "next export",
-    "deploy:vercel": "vercel --prod",
-    "deploy:firebase": "firebase deploy --only hosting",
-    "deploy:gcloud": "gcloud run deploy pantry-tracker --image gcr.io/$PROJECT_ID/pantry-tracker:$COMMIT_SHA --platform managed --region $REGION --allow-unauthenticated",
-    "check-packages": "./check-packages.sh"
+    "check-packages": "./check-packages.sh",
+    "dev": "npm run check-packages && next dev",
+    "build": "npm run check-packages && next build",
+    "start": "npm run check-packages && next start",
+    "lint": "npm run check-packages && next lint",
+    "export": "npm run check-packages && next export",
+    "deploy:vercel": "npm run check-packages && vercel --prod",
+    "deploy:firebase": "npm run check-packages && firebase deploy --only hosting",
+    "deploy:gcloud": "npm run check-packages && gcloud run deploy pantry-tracker --image gcr.io/$PROJECT_ID/pantry-tracker:$COMMIT_SHA --platform managed --region $REGION --allow-unauthenticated"
   },
   "dependencies": {
     "@emotion/react": "^11.9.3",

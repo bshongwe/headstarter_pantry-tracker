@@ -2,6 +2,9 @@
 
 module.exports = {
   reactStrictMode: true,
+  images: {
+    domains: ['firebasestorage.googleapis.com'],
+  },
   env: {
     NEXT_PUBLIC_FIREBASE_API_KEY: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
     NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
@@ -9,11 +12,9 @@ module.exports = {
     NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
     NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
     NEXT_PUBLIC_FIREBASE_APP_ID: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
-  },
-  webpack: (config, { isServer }) => {
-    if (!isServer) {
-      config.resolve.fallback.fs = false;
-    }
-    return config;
+    NEXT_PUBLIC_OPENAI_API_KEY: process.env.NEXT_PUBLIC_OPENAI_API_KEY,
+    GCP_PROJECT_ID: process.env.GCP_PROJECT_ID,
+    GCP_BUCKET_NAME: process.env.GCP_BUCKET_NAME,
+    NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
   },
 };

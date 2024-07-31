@@ -7,7 +7,11 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "deploy": "gcloud run deploy pantry-tracker --image gcr.io/$PROJECT_ID/pantry-tracker:$COMMIT_SHA --platform managed --region $REGION --allow-unauthenticated"
+    "export": "next export",
+    "deploy:vercel": "vercel --prod",
+    "deploy:firebase": "firebase deploy --only hosting",
+    "deploy:gcloud": "gcloud run deploy pantry-tracker --image gcr.io/$PROJECT_ID/pantry-tracker:$COMMIT_SHA --platform managed --region $REGION --allow-unauthenticated",
+    "check-packages": "./check-packages.sh"
   },
   "dependencies": {
     "@emotion/react": "^11.9.3",

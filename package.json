@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "check-packages": "./check-packages.sh",
     "dev": "npm run check-packages && next dev",
     "build": "npm run check-packages && next build",
     "start": "npm run check-packages && next start",

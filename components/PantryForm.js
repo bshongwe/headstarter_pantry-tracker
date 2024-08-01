@@ -1,6 +1,6 @@
 // components/PantryForm.js
 import React, { useState, useEffect } from 'react';
-import { collection, addDoc, updateDoc, doc } from 'firebase/firestore';
+import { collection, addDoc, updateDoc, doc, deleteDoc, onSnapshot } from 'firebase/firestore';
 import { db } from '../lib/firebaseConfig';
 import { Box, TextField, Button, Typography, Stack } from "@mui/material";
 

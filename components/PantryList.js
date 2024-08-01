@@ -1,5 +1,5 @@
 // components/PantryList.js
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { collection, onSnapshot } from 'firebase/firestore';
 import { db } from '../lib/firebaseConfig';
 import { Box, Typography, Button, Stack, TextField } from "@mui/material";

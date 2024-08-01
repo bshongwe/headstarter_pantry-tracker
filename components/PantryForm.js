@@ -1,29 +1,69 @@
 // components/PantryForm.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { collection, addDoc, updateDoc, doc } from 'firebase/firestore';
 import { db } from '../lib/firebaseConfig';
+import { Box, TextField, Button, Typography, Stack } from "@mui/material";
 
-const PantryForm = ({ item, onSave }) => {
-  const [name, setName] = useState(item?.name || '');
-  const [quantity, setQuantity] = useState(item?.quantity || '');
+const PantryForm = ({ selectedPantryItem, setSelectedPantryItem }) => {
+    const [name, setName] = useState("");
+    const [quantity, setQuantity] = useState("");
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (item) {
-      await updateDoc(doc(db, 'pantryItems', item.id), { name, quantity });
-    } else {
-      await addDoc(collection(db, 'pantryItems'), { name, quantity });
-    }
-    onSave();
-  };
+    useEffect(() => {
+        if (selectedPantryItem) {
+            setName(selectedPantryItem.name);
+            setQuantity(selectedPantryItem.quantity);
+        }
+    }, [selectedPantryItem]);
 
-  return (
-    <form onSubmit={handleSubmit}>
-      <input value={name} onChange={(e) => setName(e.target.value)} placeholder="Item Name" required />
-      <input value={quantity} onChange={(e) => setQuantity(e.target.value)} placeholder="Quantity" required />
-      <button type="submit">Save</button>
-    </form>
-  );
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        if (selectedPantryItem) {
+            const pantryRef = doc(db, "pantryItems", selectedPantryItem.id);
+            await updateDoc(pantryRef, { name, quantity });
+            setSelectedPantryItem(null);
+        } else {
+            await addDoc(collection(db, "pantryItems"), { name, quantity });
+        }
+        setName("");
+        setQuantity("");
+    };
+
+    const handleDelete = async () => {
+        const pantryRef = doc(db, "pantryItems", selectedPantryItem.id);
+        await deleteDoc(pantryRef);
+        setSelectedPantryItem(null);
+        setName("");
+        setQuantity("");
+    };
+
+    return (
+        <Box>
+            <form onSubmit={handleSubmit}>
+                <Stack spacing={2}>
+                    <TextField
+                        label="Item Name"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        required
+                    />
+                    <TextField
+                        label="Quantity"
+                        value={quantity}
+                        onChange={(e) => setQuantity(e.target.value)}
+                        required
+                    />
+                    <Button type="submit" variant="contained" color="primary">
+                        {selectedPantryItem ? "Update Item" : "Add Item"}
+                    </Button>
+                    {selectedPantryItem && (
+                        <Button variant="contained" color="secondary" onClick={handleDelete}>
+                            Delete Item
+                        </Button>
+                    )}
+                </Stack>
+            </form>
+        </Box>
+    );
 };
 
 export default PantryForm;

@@ -23,7 +23,7 @@ const config: Config = {
         xl: '24px',
       },
       colors: {
-        'glass': 'rgba(255, 255, 255, 0.1)',
+        'glass': 'rgba(255, 255, 255, 0.1)', // Custom color for glass effect
       },
     },
   },

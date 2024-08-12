@@ -7,7 +7,7 @@ import Layout from './components/sections/Layout'
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Pantry Tracker",
+  title: "AI Pantry Tracker",
   description: "Created by Dom",
 };
 
